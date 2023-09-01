@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { User } from '../User.type'
 import  AddAndUpdateContact  from './AddAndUpdateContact'
 
@@ -6,7 +6,7 @@ const ContactCart = ({contact}:{contact:User}) => {
   return (
     <> 
         <div><img src={contact.picture.thumbnail} alt="" /> </div>
-        <AddAndUpdateContact/>
+        <AddAndUpdateContact onClose={()=>{}} isOpen={true} />
     </>
   )
 }

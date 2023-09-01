@@ -6,13 +6,22 @@ import {FiSearch} from 'react-icons/fi'
 import {AiFillPlusCircle} from 'react-icons/ai'
 import NotFoundContact from './components/NotFoundContact';
 import ContactCart from './components/ContactCart';
-
+import AddAndUpdateContact from './components/AddAndUpdateContact';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import useDisclouse from "./hooks/UseDisclose";
 
 
 
 function App() {
-  const [numberUsersInList,setNumberUsersInList] = useState<Number>(10)
+  const [numberUsersInList, setNumberUsersInList] = useState<Number>(10)
   const [usersData,setUsersData] = useState<User[]>()
+  const [search,setSearch] = useState<string>("")
+
+  //-------------------Hooks----------------------//
+  const { isOpen, onClose, onOpen } = useDisclouse();
+
+  //-------------------useEffect-----------------//
   useEffect( () => {
     
     const fetchData = async () => {
@@ -25,20 +34,41 @@ function App() {
     fetchData();
   }, []);
 
+
+  //---------------functions----------------//
+
+  const notify = () => {
+    toast("Wow so easy!");
+  } 
+
+  const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) =>{
+    setSearch(event.target.value)
+  }
+  
+
+
   return (
     <>
       <div className='mx-auto max-w-[370px] px-4 class wall'>
         
         <Navbar/>
 
-        <div className='class wall flex gap-2'>
+        <div className='flex gap-2'>
           <div className='relative flex flex-grow items-center'>
-            <FiSearch className='' />
-            <input onChange={()=>{}} type="text"  className=''/>
+            <FiSearch className=' absolute ml-2 text-xl3 text-white ' />
+            <input 
+              onChange={handleChangeSearch} 
+              type="text"  
+              className='bg-transparent pl-9 text-white border border-white h-10 flex-grow rounded-md'
+            />
           </div>
         
 
-          <AiFillPlusCircle onClick={()=>{}} className=""/>
+          <AiFillPlusCircle onClick={onOpen} className="cursor-pointer text-5xl text-white"/>
+        </div>
+
+        <div className='text-lg'>
+          {search}
         </div>
 
         <div className=''>
@@ -59,6 +89,8 @@ function App() {
         </div>
 
       </div>
+      <ToastContainer position="bottom-center"/>
+      <AddAndUpdateContact onClose={onClose} isOpen={isOpen}/>
     </>
   )
 }

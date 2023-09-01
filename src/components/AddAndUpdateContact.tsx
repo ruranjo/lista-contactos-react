@@ -1,8 +1,15 @@
 import React from 'react'
 
-const AddAndUpdateContact:React.FC<{}> = () => {
+type Props = {
+  onClose: () => void,
+  isOpen: boolean, 
+}
+
+const AddAndUpdateContact:React.FC<Props> = ({onClose, isOpen}) => {
   return (
-    <div>AddAndUpdateContact</div>
+    <div>
+
+    </div>
   )
 }
 
