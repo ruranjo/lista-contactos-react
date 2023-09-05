@@ -5,6 +5,7 @@ const useDisclouse = () => {
 
   const onOpen = () => {
     setOpen(true);
+    console.log(isOpen)
   };
   const onClose = () => {
     setOpen(false);
